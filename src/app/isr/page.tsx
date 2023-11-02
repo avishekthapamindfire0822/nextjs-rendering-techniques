@@ -1,8 +1,11 @@
 import fs from "fs/promises";
 import path from "path";
-import { Todo } from "./types";
-import supabase from "./lib/supabase";
-export default async function Home() {
+import { Todo } from "../types";
+import supabase from "../lib/supabase";
+
+export const revalidate = 10;
+
+export default async function ISRPage() {
   const { error, data: _todos } = await supabase
     .from("todo")
     .select("*")
@@ -13,7 +16,7 @@ export default async function Home() {
   return (
     <>
       <h1 className="text-2xl tracking-wide font-semibold p-4">
-        Static Site Generation - (SSG)
+        Incremental Static Regeneration - (ISR)
       </h1>
       <div className="flex flex-col gap-4 p-4">
         {todos.map((todo) => {
