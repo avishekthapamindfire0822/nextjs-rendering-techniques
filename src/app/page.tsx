@@ -6,8 +6,8 @@ export default async function Home() {
   const { error, data: _todos } = await supabase
     .from("todo")
     .select("*")
-    .order("title", {
-      ascending: true,
+    .order("created_at", {
+      ascending: false,
     });
   const todos = _todos as Todo[];
   return (
